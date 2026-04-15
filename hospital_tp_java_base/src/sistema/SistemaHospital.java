@@ -141,6 +141,7 @@ public class SistemaHospital {
             System.out.println("2. Atender siguiente paciente por especialidad");
             System.out.println("3. Ver cola de una especialidad");
             System.out.println("4. Ver resumen de colas");
+            System.out.println("5. Ver próximo turno de una especialidad");  // Nueva opción
             System.out.println("0. Volver");
 
             opcion = leerEntero("Elegí una opción: ");
@@ -157,6 +158,9 @@ public class SistemaHospital {
                     break;
                 case 4:
                     colasEspecialidad.listarEspecialidadesYConteoPendientes();
+                    break;
+                case 5:
+                    verProximoTurnoEspecialidad();  // Nuevo case
                     break;
                 case 0:
                     System.out.println("Volviendo...");
@@ -272,6 +276,17 @@ public class SistemaHospital {
     private void verColaEspecialidad() {
         String especialidad = leerTextoNoVacio("Especialidad: ");
         colasEspecialidad.listarCola(especialidad);
+    }
+
+    private void verProximoTurnoEspecialidad() {
+        String especialidad = leerTextoNoVacio("Especialidad: ");
+        Turno proximo = colasEspecialidad.verProximoTurno(especialidad);
+        if (proximo == null) {
+            System.out.println("No hay turnos pendientes para esa especialidad.");
+        } else {
+            System.out.println("Próximo turno:");
+            System.out.println(proximo);
+        }
     }
 
     private void verTurnosProximosPorMedico() {

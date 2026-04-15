@@ -44,7 +44,7 @@ public class GestorColasPorEspecialidad {
             cantidad++;
         }
 
-        ec.cola.encolar(turno);
+        ec.cola.acolar(turno);
     }
 
     public Turno atenderSiguiente(String especialidad) {
@@ -52,7 +52,7 @@ public class GestorColasPorEspecialidad {
         if (ec == null) {
             return null;
         }
-        return ec.cola.desencolar();
+        return ec.cola.desacolar();
     }
 
     public void listarCola(String especialidad) {
@@ -62,6 +62,14 @@ public class GestorColasPorEspecialidad {
             return;
         }
         ec.cola.listar();
+    }
+
+    public Turno verProximoTurno(String especialidad) {
+        EspecialidadCola ec = buscarEspecialidad(especialidad);
+        if (ec == null) {
+            return null;
+        }
+        return ec.cola.verPrimero();
     }
 
     public void listarEspecialidadesYConteoPendientes() {
@@ -95,16 +103,16 @@ public class GestorColasPorEspecialidad {
             auxiliar.inicializarCola();
 
             while (!cola.estaVacia()) {
-                Turno t = cola.desencolar();
+                Turno t = cola.desacolar();
                 if (t.getMedico().getMatriculaCompleta().equalsIgnoreCase(matriculaCompleta)) {
                     System.out.println(t);
                     encontrado = true;
                 }
-                auxiliar.encolar(t);
+                auxiliar.acolar(t);
             }
 
             while (!auxiliar.estaVacia()) {
-                cola.encolar(auxiliar.desencolar());
+                cola.acolar(auxiliar.desacolar());
             }
         }
 
