@@ -8,11 +8,12 @@ public class GestorColasPorEspecialidad {
 
     private static class EspecialidadCola {
         String especialidad;
-        ColaTurnos cola;
+        ColaPrioridadTurnos cola;
 
         EspecialidadCola(String especialidad) {
             this.especialidad = especialidad;
-            this.cola = new ColaTurnos();
+            this.cola = new ColaPrioridadTurnos();
+            this.cola.inicializarCola();
         }
     }
 
@@ -89,8 +90,9 @@ public class GestorColasPorEspecialidad {
         boolean encontrado = false;
 
         for (int i = 0; i < cantidad; i++) {
-            ColaTurnos cola = datos[i].cola;
-            ColaTurnos auxiliar = new ColaTurnos();
+            ColaPrioridadTurnos cola = datos[i].cola;
+            ColaPrioridadTurnos auxiliar = new ColaPrioridadTurnos();
+            auxiliar.inicializarCola();
 
             while (!cola.estaVacia()) {
                 Turno t = cola.desencolar();

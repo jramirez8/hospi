@@ -242,7 +242,13 @@ public class SistemaHospital {
 
         String fecha = leerTextoNoVacio("Fecha del turno: ");
 
-        Turno turno = new Turno(paciente, medico, medico.getEspecialidad(), fecha);
+        int prioridad = leerEntero("Prioridad (1=NORMAL, 2=URGENTE, 3=EMERGENCIA): ");
+        while (prioridad < 1 || prioridad > 3) {
+            System.out.println("Ingresá un número entre 1 y 3.");
+            prioridad = leerEntero("Prioridad (1=NORMAL, 2=URGENTE, 3=EMERGENCIA): ");
+        }
+
+        Turno turno = new Turno(paciente, medico, medico.getEspecialidad(), fecha, prioridad);
         colasEspecialidad.encolarTurno(medico.getEspecialidad(), turno);
         System.out.println("Turno asignado correctamente en la cola de " + medico.getEspecialidad());
     }

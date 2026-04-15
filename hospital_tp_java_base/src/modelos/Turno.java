@@ -6,13 +6,15 @@ public class Turno {
     private String especialidad;
     private String fecha;
     private String estado; // PENDIENTE o ATENDIDO
+    private int prioridad; // 1=NORMAL, 2=URGENTE, 3=EMERGENCIA
 
-    public Turno(Paciente paciente, Medico medico, String especialidad, String fecha) {
+    public Turno(Paciente paciente, Medico medico, String especialidad, String fecha, int prioridad) {
         this.paciente = paciente;
         this.medico = medico;
         this.especialidad = especialidad;
         this.fecha = fecha;
         this.estado = "PENDIENTE";
+        this.prioridad = prioridad;
     }
 
     public Paciente getPaciente() {
@@ -35,6 +37,10 @@ public class Turno {
         return estado;
     }
 
+        public int getPrioridad() {
+        return prioridad;
+    }
+
     public void marcarAtendido() {
         this.estado = "ATENDIDO";
     }
@@ -46,6 +52,7 @@ public class Turno {
                 + " | Médico: " + medico.getNombreCompleto()
                 + " | Especialidad: " + especialidad
                 + " | Fecha: " + fecha
-                + " | Estado: " + estado;
+                + " | Estado: " + estado
+                + " | Prioridad: " + prioridad;
     }
 }
