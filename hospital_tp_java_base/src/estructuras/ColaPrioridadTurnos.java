@@ -1,6 +1,7 @@
 package estructuras;
 
 import modelos.Turno;
+import tdas.ColaPrioridadTurnosTDA;
 
 public class ColaPrioridadTurnos implements ColaPrioridadTurnosTDA {
     

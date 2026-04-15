@@ -1,4 +1,4 @@
-package estructuras;
+package tdas;
 
 import modelos.Turno;
 
