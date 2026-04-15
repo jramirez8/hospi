@@ -1,8 +1,11 @@
 package estructuras;
 
 import modelos.Paciente;
+import tdas.dinamicos.DiccionarioTDA;
 
-public class DiccionarioPacientes {
+// IMPLEMENTACIÓN DE DiccionarioTDA - DINÁMICO
+// Usa lista enlazada para guardar pacientes con su DNI
+public class DiccionarioPacientes implements DiccionarioTDA<String, Paciente> {
     private Nodo cabeza;
 
     private static class Nodo {
@@ -16,11 +19,13 @@ public class DiccionarioPacientes {
         }
     }
 
+    @Override
     public boolean put(String dni, Paciente paciente) {
         if (dni == null || paciente == null) {
             return false;
         }
 
+        // Verificar que el DNI no exista
         Nodo actual = cabeza;
         while (actual != null) {
             if (actual.clave.equals(dni)) {
@@ -29,12 +34,14 @@ public class DiccionarioPacientes {
             actual = actual.siguiente;
         }
 
+        // Agregar al principio
         Nodo nuevo = new Nodo(dni, paciente);
         nuevo.siguiente = cabeza;
         cabeza = nuevo;
         return true;
     }
 
+    @Override
     public Paciente get(String dni) {
         Nodo actual = cabeza;
         while (actual != null) {
@@ -46,10 +53,23 @@ public class DiccionarioPacientes {
         return null;
     }
 
+    @Override
     public boolean contiene(String dni) {
         return get(dni) != null;
     }
 
+    @Override
+    public int size() {
+        int count = 0;
+        Nodo actual = cabeza;
+        while (actual != null) {
+            count++;
+            actual = actual.siguiente;
+        }
+        return count;
+    }
+
+    @Override
     public void listar() {
         if (cabeza == null) {
             System.out.println("No hay pacientes cargados.");

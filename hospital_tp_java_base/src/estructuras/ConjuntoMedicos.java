@@ -1,8 +1,11 @@
 package estructuras;
 
 import modelos.Medico;
+import tdas.estaticos.ConjuntoMedicosTDA;
 
-public class ConjuntoMedicos {
+// IMPLEMENTACIÓN DE ConjuntoMedicosTDA - ESTÁTICO
+// Usa un arreglo fijo para guardar médicos sin duplicados
+public class ConjuntoMedicos implements ConjuntoMedicosTDA {
     private Medico[] datos;
     private int cantidad;
 
@@ -11,7 +14,9 @@ public class ConjuntoMedicos {
         cantidad = 0;
     }
 
+    @Override
     public boolean agregar(Medico medico) {
+        // No agrega si hay problemas
         if (medico == null || cantidad == datos.length || contieneMatricula(medico.getTipoMatricula(), medico.getNumeroMatricula())) {
             return false;
         }
@@ -20,10 +25,12 @@ public class ConjuntoMedicos {
         return true;
     }
 
+    @Override
     public boolean contieneMatricula(String tipo, String numero) {
         return buscarPorMatricula(tipo, numero) != null;
     }
 
+    @Override
     public Medico buscarPorMatricula(String tipo, String numero) {
         for (int i = 0; i < cantidad; i++) {
             if (datos[i].getTipoMatricula().equalsIgnoreCase(tipo)
@@ -34,10 +41,12 @@ public class ConjuntoMedicos {
         return null;
     }
 
+    @Override
     public int size() {
         return cantidad;
     }
 
+    @Override
     public Medico get(int indice) {
         if (indice < 0 || indice >= cantidad) {
             return null;
@@ -45,6 +54,7 @@ public class ConjuntoMedicos {
         return datos[indice];
     }
 
+    @Override
     public void listar() {
         if (cantidad == 0) {
             System.out.println("No hay médicos cargados.");

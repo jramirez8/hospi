@@ -1,8 +1,10 @@
 package estructuras;
 
 import modelos.Turno;
-import tdas.ColaPrioridadTurnosTDA;
+import tdas.dinamicos.ColaPrioridadTurnosTDA;
 
+// IMPLEMENTACIÓN DE ColaPrioridadTurnosTDA - DINÁMICO
+// Usa lista enlazada para que crezca según se agregan turnos
 public class ColaPrioridadTurnos implements ColaPrioridadTurnosTDA {
     
     private Nodo frente;
@@ -24,18 +26,17 @@ public class ColaPrioridadTurnos implements ColaPrioridadTurnosTDA {
     }
 
     @Override
-    public void encolar(Turno turno){
+    public void acolar(Turno turno){
         Nodo nuevo = new Nodo(turno);
 
-        // Caso 1: cola vacio o mayor prioridad que el frente
+        // Si la cola está vacía o el turno tiene más prioridad que el frente
         if (frente == null || turno.getPrioridad() > frente.dato.getPrioridad()){
             nuevo.siguiente = frente;
             frente = nuevo;
         } else {
-        // Caso 2: insertar en medio o al final
+        // Si no, buscar el lugar correcto para insertar
             Nodo actual = frente;
 
-            // Buscar el lugar correcto para insertar
             while (actual.siguiente != null && actual.siguiente.dato.getPrioridad() >= turno.getPrioridad()){
                 actual = actual.siguiente;
             }
@@ -48,7 +49,7 @@ public class ColaPrioridadTurnos implements ColaPrioridadTurnosTDA {
     }
 
     @Override
-    public Turno desencolar(){
+    public Turno desacolar(){
         if (estaVacia()) {
             return null;
         }
