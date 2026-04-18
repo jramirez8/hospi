@@ -1,11 +1,11 @@
 package estructuras;
 
 import modelos.Medico;
-import tdas.estaticos.ConjuntoMedicosTDA;
+import tdas.estaticos.ConjuntoEstaticoTDA;
 
 // IMPLEMENTACIÓN DE ConjuntoMedicosTDA - ESTÁTICO
 // Usa un arreglo fijo para guardar médicos sin duplicados
-public class ConjuntoMedicos implements ConjuntoMedicosTDA {
+public class ConjuntoMedicos implements ConjuntoEstaticoTDA {
     private Medico[] a;
     private int cantidad;
 

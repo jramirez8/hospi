@@ -4,7 +4,7 @@ import modelos.Turno;
 
 // TDA Cola de Prioridad de Turnos - DINÁMICO
 // Especial para trabajar con turnos del hospital
-public interface ColaPrioridadTurnosTDA {
+public interface ColaPrioridadTDA {
     
     // Inicializa la cola vacía
     void InicializarCola();

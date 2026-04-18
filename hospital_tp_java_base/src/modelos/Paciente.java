@@ -1,17 +1,17 @@
 package modelos;
 
 public class Paciente {
-    private String dni;
+    private int dni;
     private String nombre;
     private int edad;
 
-    public Paciente(String dni, String nombre, int edad) {
+    public Paciente(int dni, String nombre, int edad) {
         this.dni = dni;
         this.nombre = nombre;
         this.edad = edad;
     }
 
-    public String getDni() {
+    public int getDni() {
         return dni;
     }
 

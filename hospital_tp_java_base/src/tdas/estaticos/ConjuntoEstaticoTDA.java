@@ -4,7 +4,7 @@ import modelos.Medico;
 
 // TDA Conjunto de Médicos - ESTÁTICO
 // Especial para trabajar con médicos, sin duplicados
-public interface ConjuntoMedicosTDA {
+public interface ConjuntoEstaticoTDA {
     
     void InicializarConjunto();
 

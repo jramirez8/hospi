@@ -1,11 +1,11 @@
 package estructuras;
 
 import modelos.Turno;
-import tdas.dinamicos.ColaPrioridadTurnosTDA;
+import tdas.dinamicos.ColaPrioridadTDA;
 
 // IMPLEMENTACIÓN DE ColaPrioridadTurnosTDA - DINÁMICO
 // Usa lista enlazada para que crezca según se agregan turnos
-public class ColaPrioridadTurnos implements ColaPrioridadTurnosTDA {
+public class ColaPrioridadTurnos implements ColaPrioridadTDA {
     
     private Nodo primero;
 
