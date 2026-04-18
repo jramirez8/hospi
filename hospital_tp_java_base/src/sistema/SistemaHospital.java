@@ -83,7 +83,7 @@ public class SistemaHospital {
         String nombre = leerTexto("Nombre: ");
         String apellido = leerTexto("Apellido: ");
 
-        System.out.println("Especialidad: 1.Cardio 2.Pedia 3.Trauma");
+        System.out.println("Especialidad: 1.Cardio 2.Pedia 3.Trauma");    
         int esp = leerEntero("Opción: ");
 
         String horario = leerTexto("Horario: ");
