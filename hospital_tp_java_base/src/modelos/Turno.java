@@ -7,20 +7,12 @@ public class Turno {
     private static final String PENDIENTE = "PENDIENTE";
     private static final String ATENDIDO = "ATENDIDO";
     private String estado;
-    private int prioridad; // 3=NORMAL, 2=URGENTE, 1=EMERGENCIA
 
-    public Turno(Paciente paciente, Medico medico, String fecha, int prioridad) {
+    public Turno(Paciente paciente, Medico medico, String fecha) {
         this.paciente = paciente;
         this.medico = medico;
         this.fecha = fecha;
         this.estado = PENDIENTE;
-        this.prioridad = prioridad;
-    }
-
-    private String interpretarPrioridad() {
-        if (prioridad == 1) return "EMERGENCIA";
-        if (prioridad == 2) return "URGENTE";
-        return "NORMAL";
     }
 
     public Paciente getPaciente() {
@@ -39,10 +31,6 @@ public class Turno {
         return estado;
     }
 
-    public int getPrioridad() {
-        return prioridad;
-    }
-
     public void marcarAtendido() {
         this.estado = ATENDIDO;
     }
@@ -53,7 +41,6 @@ public class Turno {
                 + " | Médico: " + medico.getNombreCompleto()
                 + " | Especialidad: " + medico.getEspecialidad()
                 + " | Fecha: " + fecha
-                + " | Estado: " + estado
-                + " | Prioridad: " + interpretarPrioridad();
+                + " | Estado: " + estado;
     }
 }
