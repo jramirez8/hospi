@@ -1,6 +1,8 @@
 package estructuras;
 
+import tdas.dinamicos.ConjuntoTDA;
 import tdas.dinamicos.DiccionarioSimpleTDA;
+import modelos.Paciente;
 
 public class DiccionarioPacientes implements DiccionarioSimpleTDA {
     private class NodoDic {
@@ -23,7 +25,6 @@ public class DiccionarioPacientes implements DiccionarioSimpleTDA {
         primero = null;
     }
 
-    @Override
     public void Agregar(int dni, Paciente paciente) {
         NodoDic nodo = Clave(dni);             //Buscamos si el dni existe
         if (nodo == null) {                      //Si el dni no existia.

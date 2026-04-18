@@ -1,8 +1,9 @@
 package tdas.dinamicos;
 
+import modelos.Paciente;
 // TDA Diccionario - DINÁMICO
 // Estructura clave-valor
-public interface DiccionarioTDA {
+public interface DiccionarioSimpleTDA {
     
     void InicializarDiccionario();
 

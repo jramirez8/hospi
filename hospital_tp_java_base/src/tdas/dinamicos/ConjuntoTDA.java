@@ -12,5 +12,5 @@ public interface ConjuntoTDA {
 
     boolean ConjuntoVacio(); // True / False
 
-    boolean Pertenece(int x) // True / False
+    boolean Pertenece(int x); // True / False
 }

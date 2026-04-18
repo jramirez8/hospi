@@ -1,5 +1,6 @@
-package estructuras;
+package sistema;
 
+import estructuras.ColaPrioridadTurnos;
 import modelos.Turno;
 
 public class GestorColasPorEspecialidad {
@@ -13,7 +14,7 @@ public class GestorColasPorEspecialidad {
         EspecialidadCola(String especialidad) {
             this.especialidad = especialidad;
             this.cola = new ColaPrioridadTurnos();
-            this.cola.inicializarCola();
+            this.cola.InicializarCola();
         }
     }
 
@@ -44,7 +45,7 @@ public class GestorColasPorEspecialidad {
             cantidad++;
         }
 
-        ec.cola.acolar(turno);
+        ec.cola.AcolarPrioridad(turno, cantidad);
     }
 
     public Turno atenderSiguiente(String especialidad) {
