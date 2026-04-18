@@ -1,6 +1,8 @@
 package estructuras;
 
-public class DicPacientesImpl implements DiccionarioSimpleTDA {
+import tdas.dinamicos.DiccionarioSimpleTDA;
+
+public class DiccionarioPacientes implements DiccionarioSimpleTDA {
     private class NodoDic {
         int dni;
         Paciente paciente;
@@ -21,6 +23,7 @@ public class DicPacientesImpl implements DiccionarioSimpleTDA {
         primero = null;
     }
 
+    @Override
     public void Agregar(int dni, Paciente paciente) {
         NodoDic nodo = Clave(dni);             //Buscamos si el dni existe
         if (nodo == null) {                      //Si el dni no existia.

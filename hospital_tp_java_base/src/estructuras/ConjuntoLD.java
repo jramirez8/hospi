@@ -1,5 +1,7 @@
 package estructuras;
 
+import tdas.dinamicos.ConjuntoTDA;
+
 public class ConjuntoLD implements ConjuntoTDA {
 
     private class Nodo {
