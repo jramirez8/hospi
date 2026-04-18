@@ -6,63 +6,46 @@ import tdas.estaticos.ConjuntoMedicosTDA;
 // IMPLEMENTACIÓN DE ConjuntoMedicosTDA - ESTÁTICO
 // Usa un arreglo fijo para guardar médicos sin duplicados
 public class ConjuntoMedicos implements ConjuntoMedicosTDA {
-    private Medico[] datos;
+    private Medico[] a;
     private int cantidad;
 
-    public ConjuntoMedicos(int capacidadMaxima) {
-        datos = new Medico[capacidadMaxima];
+    public void InicializarConjunto() {
+        a = new Medico[100];
         cantidad = 0;
     }
 
-    @Override
-    public boolean agregar(Medico medico) {
+    public void Agregar(Medico medico) {
         // No agrega si hay problemas
-        if (medico == null || cantidad == datos.length || contieneMatricula(medico.getTipoMatricula(), medico.getNumeroMatricula())) {
-            return false;
+        if (!this.Pertenece(medico)) {
+            a[cantidad] = medico;
+            cantidad++;
         }
-        datos[cantidad] = medico;
-        cantidad++;
-        return true;
     }
 
-    @Override
-    public boolean contieneMatricula(String tipo, String numero) {
-        return buscarPorMatricula(tipo, numero) != null;
+    public Medico Elegir() {  //No debe estar vacio
+        return a[cantidad - 1];
     }
 
-    @Override
-    public Medico buscarPorMatricula(String tipo, String numero) {
-        for (int i = 0; i < cantidad; i++) {
-            if (datos[i].getTipoMatricula().equalsIgnoreCase(tipo)
-                    && datos[i].getNumeroMatricula().equals(numero)) {
-                return datos[i];
-            }
+    public boolean Pertenece(Medico medico) {  // True / False
+        int i = 0;
+        while (i < cantidad && !a[i].equals(medico)) {   //Comparamos por identidad, no por objeto (ya que dos objetos diferentes en memoria pueden referenciar a un mismo medico)
+            i++;
         }
-        return null;
+        return (i < cantidad);
     }
 
-    @Override
-    public int size() {
-        return cantidad;
+    public void Sacar(Medico medico) {
+        int i = 0;
+        while (i < cantidad && !a[i].equals(medico)) {   //Comparacion por identidad nuevamente
+            i++;
+        }
+        if (i < cantidad) {
+            a[i] = a[cantidad - 1];   //El valor a eliminar se reemplaza con el ultimo valor (a[cantidad - 1]), y ese ultimo valor se elimina reduciendo uno la catidad.
+            cantidad--;
+        }
     }
 
-    @Override
-    public Medico get(int indice) {
-        if (indice < 0 || indice >= cantidad) {
-            return null;
-        }
-        return datos[indice];
-    }
-
-    @Override
-    public void listar() {
-        if (cantidad == 0) {
-            System.out.println("No hay médicos cargados.");
-            return;
-        }
-
-        for (int i = 0; i < cantidad; i++) {
-            System.out.println((i + 1) + ". " + datos[i]);
-        }
+    public boolean ConjuntoVacio() {  // True / False
+        return (cantidad == 0);
     }
 }

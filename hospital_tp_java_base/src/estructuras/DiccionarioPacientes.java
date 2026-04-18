@@ -1,85 +1,70 @@
 package estructuras;
 
-import modelos.Paciente;
-import tdas.dinamicos.DiccionarioTDA;
-
-// IMPLEMENTACIÓN DE DiccionarioTDA - DINÁMICO
-// Usa lista enlazada para guardar pacientes con su DNI
-public class DiccionarioPacientes implements DiccionarioTDA<String, Paciente> {
-    private Nodo cabeza;
-
-    private static class Nodo {
-        String clave;
-        Paciente valor;
-        Nodo siguiente;
-
-        Nodo(String clave, Paciente valor) {
-            this.clave = clave;
-            this.valor = valor;
-        }
+public class DicPacientesImpl implements DiccionarioSimpleTDA {
+    private class NodoDic {
+        int dni;
+        Paciente paciente;
+        NodoDic siguiente;
     }
 
-    @Override
-    public boolean put(String dni, Paciente paciente) {
-        if (dni == null || paciente == null) {
-            return false;
-        }
+    private NodoDic primero;
 
-        // Verificar que el DNI no exista
-        Nodo actual = cabeza;
-        while (actual != null) {
-            if (actual.clave.equals(dni)) {
-                return false;
+    private NodoDic Clave(int dni) {
+        NodoDic aux = primero;
+        while (aux != null && aux.dni != dni) {
+            aux = aux.siguiente;
+        }
+        return aux;
+    }
+
+    public void InicializarDiccionario() {
+        primero = null;
+    }
+
+    public void Agregar(int dni, Paciente paciente) {
+        NodoDic nodo = Clave(dni);             //Buscamos si el dni existe
+        if (nodo == null) {                      //Si el dni no existia.
+            nodo = new NodoDic();
+            nodo.dni = dni;
+            nodo.paciente = paciente;
+            nodo.siguiente = primero;
+            primero = nodo;                  //Nuevo dni pasa a ser el primero
+        }
+        nodo.paciente = paciente;
+    }
+
+    public void Eliminar(int dni) {
+        if (primero != null) {                           //Caso especifico: valor en primera pos
+            if (primero.dni == dni) {
+                primero = primero.siguiente;             //El segundo pasa a ser primero
+            } else {                                     //Es algun otro
+                NodoDic aux = primero;
+                while (aux.siguiente != null && aux.siguiente.dni != dni) { //Hasta encontrar la coincidencia (desde el anterior)
+                    aux = aux.siguiente;
+                }
+                if (aux != null && aux.siguiente != null) {
+                    aux.siguiente = aux.siguiente.siguiente; //La coincidencia se ignora apuntando a su siguiente.
+                }
             }
-            actual = actual.siguiente;
         }
-
-        // Agregar al principio
-        Nodo nuevo = new Nodo(dni, paciente);
-        nuevo.siguiente = cabeza;
-        cabeza = nuevo;
-        return true;
     }
 
-    @Override
-    public Paciente get(String dni) {
-        Nodo actual = cabeza;
-        while (actual != null) {
-            if (actual.clave.equals(dni)) {
-                return actual.valor;
-            }
-            actual = actual.siguiente;
-        }
-        return null;
+    public Paciente Recuperar(int dni) {
+        NodoDic nodo = Clave(dni);                //Busco coincidencia
+        return nodo.paciente;                     //Devuelvo el valor de la coincidencia
     }
 
-    @Override
-    public boolean contiene(String dni) {
-        return get(dni) != null;
-    }
+    public ConjuntoTDA Claves() {
+        ConjuntoTDA c = new ConjuntoLD();
+        c.InicializarConjunto();
 
-    @Override
-    public int size() {
-        int count = 0;
-        Nodo actual = cabeza;
-        while (actual != null) {
-            count++;
-            actual = actual.siguiente;
-        }
-        return count;
-    }
+        NodoDic aux = primero;
 
-    @Override
-    public void listar() {
-        if (cabeza == null) {
-            System.out.println("No hay pacientes cargados.");
-            return;
+        while (aux != null) {
+            c.Agregar(aux.dni);
+            aux = aux.siguiente;
         }
 
-        Nodo actual = cabeza;
-        while (actual != null) {
-            System.out.println(actual.valor);
-            actual = actual.siguiente;
-        }
+        return c;
     }
 }

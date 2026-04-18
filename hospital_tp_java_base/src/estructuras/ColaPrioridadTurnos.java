@@ -7,89 +7,57 @@ import tdas.dinamicos.ColaPrioridadTurnosTDA;
 // Usa lista enlazada para que crezca según se agregan turnos
 public class ColaPrioridadTurnos implements ColaPrioridadTurnosTDA {
     
-    private Nodo frente;
-    private int cantidad;
+    private Nodo primero;
 
     private class Nodo {
         Turno dato;
+        int prioridad;
         Nodo siguiente;
 
-        Nodo(Turno dato) {
+        Nodo(Turno dato, int prioridad) {
             this.dato = dato;
+            this.prioridad = prioridad;
         }
     }
 
-    @Override
-    public void inicializarCola() {
-        frente = null;
-        cantidad = 0;
+    public void InicializarCola() {
+        primero = null;
     }
 
-    @Override
-    public void acolar(Turno turno){
-        Nodo nuevo = new Nodo(turno);
+    public void AcolarPrioridad(Turno turno, int prioridad){
+        Nodo nuevo = new Nodo(turno, prioridad);
 
         // Si la cola está vacía o el turno tiene más prioridad que el frente
-        if (frente == null || turno.getPrioridad() > frente.dato.getPrioridad()){
-            nuevo.siguiente = frente;
-            frente = nuevo;
+        if (primero == null || primero.prioridad > prioridad){
+            nuevo.siguiente = primero; //Nuevo nodo al principio
+            primero = nuevo;
         } else {
         // Si no, buscar el lugar correcto para insertar
-            Nodo actual = frente;
+            Nodo aux = primero;
 
-            while (actual.siguiente != null && actual.siguiente.dato.getPrioridad() >= turno.getPrioridad()){
-                actual = actual.siguiente;
+            while (aux.siguiente != null && aux.siguiente.prioridad <= prioridad){
+                aux = aux.siguiente;
             }
 
-            nuevo.siguiente = actual.siguiente;
-            actual.siguiente = nuevo;
+            nuevo.siguiente = aux.siguiente;
+            aux.siguiente = nuevo;
         }
 
-        cantidad++;
     }
 
-    @Override
-    public Turno desacolar(){
-        if (estaVacia()) {
-            return null;
-        }
-
-        Turno dato = frente.dato;
-        frente = frente.siguiente;
-        cantidad--;
-
-        return dato;
+    public void Desacolar(){
+        primero = primero.siguiente; //Se olvida el primero (primero pasa al siguiente)
     }
 
-    @Override
-    public Turno verPrimero() {
-        if (estaVacia()) {
-            return null;
-        }
-        return frente.dato;
+    public Turno Primero() {
+        return primero.dato;
     }
 
-    @Override
-    public boolean estaVacia() {
-        return frente == null;
+    public boolean ColaVacia() {
+        return (primero == null);
     }
 
-    @Override
-    public int size() {
-        return cantidad;
-    }
-
-    @Override
-    public void listar() {
-        if(estaVacia()) {
-            System.out.println("No hay turnos en la cola.");
-            return;
-        }
-    
-        Nodo actual = frente;
-        while (actual != null) {
-            System.out.println(actual.dato);
-            actual = actual.siguiente;
-        }
+    public int Prioridad() {
+        return primero.prioridad;
     }
 }

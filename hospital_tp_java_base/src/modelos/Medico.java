@@ -3,7 +3,7 @@ package modelos;
 public class Medico {
     private String nombre;
     private String apellido;
-    private String especialidad;
+    private String especialidad; //Cardiología  Pediatría  Traumatología
     private String horarioDisponible;
     private String tipoMatricula; // P o N
     private String numeroMatricula;
@@ -48,6 +48,15 @@ public class Medico {
 
     public String getMatriculaCompleta() {
         return tipoMatricula + "-" + numeroMatricula;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Medico) {  //Si el objeto que se pasó es un medico
+            Medico m = (Medico) o;  //Se convierte "o" a tipo medico
+            return this.getMatriculaCompleta().equals(m.getMatriculaCompleta());  //Condicion para que sean iguales
+        }
+        return false;
     }
 
     @Override

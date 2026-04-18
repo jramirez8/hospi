@@ -6,21 +6,20 @@ import modelos.Medico;
 // Especial para trabajar con médicos, sin duplicados
 public interface ConjuntoMedicosTDA {
     
+    void InicializarConjunto();
+
     // Agrega un médico al conjunto
-    boolean agregar(Medico medico);
+    void Agregar(Medico medico);
 
-    // Busca un médico por su matrícula
-    Medico buscarPorMatricula(String tipoMatricula, String numeroMatricula);
+    // Medico arbitrario
+    Medico Elegir();
 
-    // Dice si existe un médico con esa matrícula
-    boolean contieneMatricula(String tipoMatricula, String numeroMatricula);
-
-    // Retorna cuántos médicos hay
-    int size();
+    // Dice si existe un médico
+    boolean Pertenece(Medico medico);
 
     // Obtiene un médico por su posición
-    Medico get(int indice);
+    void Sacar(Medico medico);
 
-    // Muestra todos los médicos
-    void listar();
+    // True / False
+    boolean ConjuntoVacio();
 }

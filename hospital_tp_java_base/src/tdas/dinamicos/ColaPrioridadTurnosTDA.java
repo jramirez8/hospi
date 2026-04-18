@@ -7,23 +7,20 @@ import modelos.Turno;
 public interface ColaPrioridadTurnosTDA {
     
     // Inicializa la cola vacía
-    void inicializarCola();
+    void InicializarCola();
 
     // Agrega un turno respetando su prioridad
-    void acolar(Turno turno);
+    void AcolarPrioridad(Turno turno, int prioridad);
 
     // Saca el turno con mayor prioridad
-    Turno desacolar();
+    void Desacolar();
 
     // Ve el próximo turno sin sacarlo
-    Turno verPrimero();
+    Turno Primero();
 
     // Dice si la cola está vacía
-    boolean estaVacia();
+    boolean ColaVacia();
 
-    // Retorna cuántos turnos hay
-    int size();
-
-    // Muestra todos los turnos
-    void listar();
+    // Devuelve el indice del elemento con mas prioridad
+    int Prioridad();
 }

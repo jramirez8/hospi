@@ -3,18 +3,24 @@ package modelos;
 public class Turno {
     private Paciente paciente;
     private Medico medico;
-    private String especialidad;
     private String fecha;
-    private String estado; // PENDIENTE o ATENDIDO
-    private int prioridad; // 1=NORMAL, 2=URGENTE, 3=EMERGENCIA
+    private static final String PENDIENTE = "PENDIENTE";
+    private static final String ATENDIDO = "ATENDIDO";
+    private String estado;
+    private int prioridad; // 3=NORMAL, 2=URGENTE, 1=EMERGENCIA
 
-    public Turno(Paciente paciente, Medico medico, String especialidad, String fecha, int prioridad) {
+    public Turno(Paciente paciente, Medico medico, String fecha, int prioridad) {
         this.paciente = paciente;
         this.medico = medico;
-        this.especialidad = especialidad;
         this.fecha = fecha;
-        this.estado = "PENDIENTE";
+        this.estado = PENDIENTE;
         this.prioridad = prioridad;
+    }
+
+    private String interpretarPrioridad() {
+        if (prioridad == 1) return "EMERGENCIA";
+        if (prioridad == 2) return "URGENTE";
+        return "NORMAL";
     }
 
     public Paciente getPaciente() {
@@ -25,10 +31,6 @@ public class Turno {
         return medico;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
     public String getFecha() {
         return fecha;
     }
@@ -37,22 +39,21 @@ public class Turno {
         return estado;
     }
 
-        public int getPrioridad() {
+    public int getPrioridad() {
         return prioridad;
     }
 
     public void marcarAtendido() {
-        this.estado = "ATENDIDO";
+        this.estado = ATENDIDO;
     }
 
-    @Override
     public String toString() {
         return "Turno | Paciente: " + paciente.getNombre()
                 + " | DNI: " + paciente.getDni()
                 + " | Médico: " + medico.getNombreCompleto()
-                + " | Especialidad: " + especialidad
+                + " | Especialidad: " + medico.getEspecialidad()
                 + " | Fecha: " + fecha
                 + " | Estado: " + estado
-                + " | Prioridad: " + prioridad;
+                + " | Prioridad: " + interpretarPrioridad();
     }
 }
