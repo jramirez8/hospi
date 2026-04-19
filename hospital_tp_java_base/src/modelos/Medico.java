@@ -17,7 +17,7 @@ public class Medico {
 
     private String nombre;
     private String apellido;
-    private String especialidad;
+    private int especialidad;
     private String horarioDisponible;
     private String tipoMatricula;
     private String numeroMatricula;
@@ -39,18 +39,18 @@ public class Medico {
         // -------------------------
         // ASIGNAR ESPECIALIDAD
         // -------------------------
-        switch (opcionEspecialidad) {
+        switch (opcionEspecialidad) {   //1 cardio  2 pedia  3 trauma
             case 1:
-                this.especialidad = CARDIOLOGIA;
+                this.especialidad = 1;
                 break;
             case 2:
-                this.especialidad = PEDIATRIA;
+                this.especialidad = 2;
                 break;
             case 3:
-                this.especialidad = TRAUMATOLOGIA;
+                this.especialidad = 3;
                 break;
             default:
-                this.especialidad = CARDIOLOGIA; // fallback
+                this.especialidad = 1; // fallback
         }
 
         // -------------------------
@@ -83,7 +83,7 @@ public class Medico {
         return nombre + " " + apellido;
     }
 
-    public String getEspecialidad() {
+    public int getEspecialidad() {
         return especialidad;
     }
 
