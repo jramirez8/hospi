@@ -323,7 +323,7 @@ public class SistemaHospital {
         do {
             System.out.println("\n--- TURNOS ---");
             System.out.println("1. Agregar turno");
-            System.out.println("2. Eliminar (atender) turno");
+            System.out.println("2. Eliminar turno");
             System.out.println("3. Ver próximo turno");
             System.out.println("0. Volver");
 
