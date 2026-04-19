@@ -232,7 +232,7 @@ public class SistemaHospital {
         int dni = leerEntero("DNI: ");
 
         // Validación importante
-        if (pacientes.Recuperar(dni) != null) {
+        if (existePaciente(dni)) {
             System.out.println("Ya existe un paciente con ese DNI.");
             return;
         }
@@ -252,7 +252,7 @@ public class SistemaHospital {
 
         int dni = leerEntero("DNI: ");
 
-        if (pacientes.Recuperar(dni) == null) {
+        if (existePaciente(dni)) {
             System.out.println("No existe un paciente con ese DNI.");
             return;
         }
@@ -268,13 +268,13 @@ public class SistemaHospital {
 
         int dni = leerEntero("DNI: ");
 
-        Paciente p = pacientes.Recuperar(dni);
-
-        if (p == null) {
+        if (!existePaciente(dni)) {
             System.out.println("Paciente no encontrado.");
-        } else {
-            System.out.println(p);
+            return;
         }
+
+        Paciente p = pacientes.Recuperar(dni);
+        System.out.println(p);
     }
 
     private void listarPacientes() {
@@ -295,6 +295,20 @@ public class SistemaHospital {
             Paciente p = pacientes.Recuperar(dni);
             System.out.println(p);
         }
+    }
+
+    private boolean existePaciente(int dni) {
+        ConjuntoTDA claves = pacientes.Claves();
+
+        while (!claves.ConjuntoVacio()) {
+            int x = claves.Elegir();
+            claves.Sacar(x);
+
+            if (x == dni) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // =========================
@@ -331,12 +345,11 @@ public class SistemaHospital {
         System.out.println("\n--- AGREGAR TURNO ---");
 
         int dni = leerEntero("DNI paciente: ");
-        Paciente p = pacientes.Recuperar(dni);
-
-        if (p == null) {
+        if (!existePaciente(dni)) {
             System.out.println("Paciente inexistente.");
             return;
         }
+        Paciente p = pacientes.Recuperar(dni);
 
         int especialidad = leerEnteroRango("Especialidad (1.Cardio 2.Pedia 3.Trauma): ", 1, 3);
 
