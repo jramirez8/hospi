@@ -122,6 +122,10 @@ public class SistemaHospital {
         Medico m = new Medico(nombre, apellido, esp, horario, tipo, numero);
         medicos.Agregar(m);
 
+        if (medicos.Pertenece(m)) {
+            System.out.println("Ya existe un médico con esa matrícula.");
+            return;
+        }
         System.out.println("Médico agregado con éxito.");
     }
 
