@@ -48,6 +48,29 @@ public class SistemaHospital {
 
         colaTraumatologia = new ColaPrioridadTurnos();
         colaTraumatologia.InicializarCola();
+    // =========================
+        // CARGA AUTOMÁTICA DE PACIENTES
+        // =========================
+        Paciente p1 = new Paciente(12345678, "Juan Pérez", 30);
+        pacientes.Agregar(12345678, p1);
+
+        Paciente p2 = new Paciente(87654321, "María García", 25);
+        pacientes.Agregar(87654321, p2);
+
+        Paciente p3 = new Paciente(11223344, "Carlos López", 40);
+        pacientes.Agregar(11223344, p3);
+
+        // =========================
+        // CARGA AUTOMÁTICA DE MÉDICOS
+        // =========================
+        Medico m1 = new Medico("Ana", "Ruiz", 1, "9-17", 1, "123");
+        medicos.Agregar(m1);
+
+        Medico m2 = new Medico("Pedro", "Sánchez", 2, "8-16", 2, "456");
+        medicos.Agregar(m2);
+
+        Medico m3 = new Medico("Laura", "Fernández", 3, "10-18", 1, "789");
+        medicos.Agregar(m3);
     }
 
     // =========================
